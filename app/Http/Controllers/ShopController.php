@@ -28,7 +28,8 @@ class ShopController extends Controller {
 
     
     public function deployed($shopName) {
-        return "La boutique a été déployée sur : " . $shopName . ".domain.xxx";
+        return view('shop.deployed', compact('shopName'));
     }
+    
 }
 

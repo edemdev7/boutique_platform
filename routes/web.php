@@ -20,7 +20,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [ShopController::class, 'createForm'])->name('dashboard');
     Route::post('/dashboard', [ShopController::class, 'store'])->name('shop.store');
+    Route::get('/shop/deployed/{shopName}', [ShopController::class, 'deployed'])->name('shop.deployed');
 });
+
 
 
 Route::group(['domain' => '{shopName}.domain.xxx'], function () {
