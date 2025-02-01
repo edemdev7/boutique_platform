@@ -7,6 +7,12 @@
 <body>
     <h1>Connexion</h1>
 
+    @if (session('success'))
+        <div style="color: green;">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <!-- Affichage des erreurs -->
     @if ($errors->any())
         <div style="color: red;">

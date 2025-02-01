@@ -28,8 +28,7 @@ class AuthController extends Controller {
         ]);
 
         Auth::login($user);
-        return redirect()->route('dashboard');
-    }
+        return redirect()->route('login.form')->with('success', 'Votre inscription a été réalisée avec succès. Veuillez vous connecter.');    }
 
     public function showLoginForm() {
         return view('auth.login');

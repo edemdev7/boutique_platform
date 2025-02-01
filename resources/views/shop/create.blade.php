@@ -27,6 +27,23 @@
     </form>
 
     <br>
+    <h2>Vos 10 dernières boutiques</h2>
+    @if(isset($shops) && $shops->count() > 0)
+        <ul>
+            @foreach ($shops as $shop)
+                <li>
+                    <a href="{{ route('shop.deployed', ['shopName' => $shop->name]) }}">
+                        {{ $shop->name }}
+                    </a>
+                    <span> - Créée le {{ $shop->created_at->format('d/m/Y H:i') }}</span>
+                </li>
+            @endforeach
+        </ul>
+    @else
+        <p>Aucune boutique créée pour le moment.</p>
+    @endif
+
+    <br>
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit">Se déconnecter</button>

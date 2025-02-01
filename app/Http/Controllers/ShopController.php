@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/ShopController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -10,7 +8,12 @@ use App\Models\Shop;
 
 class ShopController extends Controller {
     public function createForm() {
-        return view('shop.create'); 
+        $shops = Shop::where('user_id', Auth::id())
+                     ->orderBy('created_at', 'desc')
+                     ->limit(10)
+                     ->get();
+
+        return view('shop.create', compact('shops'));
     }
 
     public function store(Request $request) {
