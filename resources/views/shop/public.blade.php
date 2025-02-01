@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ $shop->name }}</title>
+    <title>Boutique {{ $shop->name }}</title>
 </head>
 <body>
     <h1>Boutique : {{ $shop->name }}</h1>

@@ -21,10 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [ShopController::class, 'createForm'])->name('dashboard');
     Route::post('/dashboard', [ShopController::class, 'store'])->name('shop.store');
     Route::get('/shop/deployed/{shopName}', [ShopController::class, 'deployed'])->name('shop.deployed');
+    Route::get('/shops/{shopName}', [ShopPublicController::class, 'show'])->name('shop.public');
 });
 
 
 
-Route::group(['domain' => '{shopName}.domain.xxx'], function () {
-    Route::get('/', [ShopPublicController::class, 'show']);
-});
+// Route::group(['domain' => '{shopName}.domain.xxx'], function () {
+//     Route::get('/', [ShopPublicController::class, 'show']);
+// });

@@ -17,11 +17,12 @@
         </div>
     @endif
 
-    <form action="{{ route('shop.store') }}" method="POST">
+    <form method="POST" action="{{ route('shop.store') }}">
         @csrf
         <div>
-            <label for="name">Nom de la Boutique :</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" required>
+            <label>Nom de la boutique:</label>
+            <input type="text" name="name" pattern="[a-zA-Z0-9\-]+" title="Lettres, chiffres et tirets uniquement" required>
+            <small>Uniquement lettres, chiffres et tirets (-)</small>
         </div>
         <button type="submit">Créer la boutique</button>
     </form>
@@ -31,12 +32,10 @@
     @if(isset($shops) && $shops->count() > 0)
         <ul>
             @foreach ($shops as $shop)
-                <li>
-                    <a href="{{ route('shop.deployed', ['shopName' => $shop->name]) }}">
-                        {{ $shop->name }}
-                    </a>
-                    <span> - Créée le {{ $shop->created_at->format('d/m/Y H:i') }}</span>
-                </li>
+            <li>
+                <a href="{{ url($shop->url) }}" target="_blank">{{ $shop->name }}</a>
+                (Créée le {{ $shop->created_at->format('d/m/Y') }})
+            </li>
             @endforeach
         </ul>
     @else

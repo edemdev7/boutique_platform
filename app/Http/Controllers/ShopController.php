@@ -12,27 +12,34 @@ class ShopController extends Controller {
                      ->orderBy('created_at', 'desc')
                      ->limit(10)
                      ->get();
-
-        return view('shop.create', compact('shops'));
+                     
+        $baseUrl = config('app.url');
+        return view('shop.create', compact('shops', 'baseUrl'));
     }
 
     public function store(Request $request) {
         $request->validate([
-            'name' => 'required|string|max:255|unique:shops,name',
+            'name' => 'required|string|max:255|unique:shops,name|alpha_dash',
         ]);
 
         $shop = Shop::create([
             'user_id' => Auth::id(),
             'name'    => $request->name,
+            'url'     => $this->generateShopUrl($request->name)
         ]);
 
         return redirect()->route('shop.deployed', ['shopName' => $shop->name]);
     }
 
-    
-    public function deployed($shopName) {
-        return view('shop.deployed', compact('shopName'));
+    private function generateShopUrl($shopName) {
+        // j'utilise un sous-chemin au lieu d'un sous-domaine
+        return '/shops/' . $shopName;
     }
     
+    public function deployed($shopName) {
+        $shop = Shop::where('name', $shopName)->firstOrFail();
+        $shopUrl = url($shop->url);
+        return view('shop.deployed', compact('shopName', 'shopUrl'));
+    }
 }
 
