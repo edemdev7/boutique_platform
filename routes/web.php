@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
 
 
 
-// Route::group(['domain' => '{shopName}.domain.xxx'], function () {
-//     Route::get('/', [ShopPublicController::class, 'show']);
-// });
+Route::domain('{shopName}.edemdev.me')->group(function () {
+    // La route par défaut pour accéder à la boutique via le sous-domaine
+    Route::get('/', [ShopPublicController::class, 'show'])
+         ->name('shop.public');
+});

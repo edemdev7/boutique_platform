@@ -13,3 +13,4 @@ class ShopPublicController extends Controller {
         return view('shop.public', compact('shop', 'user'));
     }
 }
+
