@@ -5,6 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopPublicController;
 
+
+Route::domain('{shopName}.edemdev.me')->group(function () {
+    //  route par défaut pour accéder à la boutique via le sous-domaine
+    Route::get('/', [ShopPublicController::class, 'show'])
+         ->name('shop.public');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,9 +32,3 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
-Route::domain('{shopName}.edemdev.me')->group(function () {
-    // La route par défaut pour accéder à la boutique via le sous-domaine
-    Route::get('/', [ShopPublicController::class, 'show'])
-         ->name('shop.public');
-});

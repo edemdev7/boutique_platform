@@ -5,10 +5,10 @@
     <title>Bienvenue</title>
 </head>
 <body>
-    <h1>Bienvenue sur notre plateforme</h1>
+    <h1>Bienvenue sur notre plateforme de gestion de vos boutiques</h1>
 
     @if (Auth::check())
-        <!-- Si l'utilisateur est connecté -->
+        <!-- Si user connecté -->
         <p>Bonjour, {{ Auth::user()->name }} !</p>
         <p>
             <a href="{{ route('dashboard') }}">
@@ -20,7 +20,7 @@
             <button type="submit">Se déconnecter</button>
         </form>
     @else
-        <!-- Si l'utilisateur n'est pas connecté -->
+        <!-- Si user non connecté-->
         <p>
             <a href="{{ route('register.form') }}">
                 <button>Inscription</button>
